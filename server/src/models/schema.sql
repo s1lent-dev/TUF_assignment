@@ -1,0 +1,10 @@
+CREATE DATABASE TUF_DB;
+USE TUF_DB;
+
+CREATE TABLE banner (
+  bannerId INT PRIMARY KEY AUTO_INCREMENT,
+  bannerDesc TEXT,
+  timer INT,
+  link VARCHAR(255),
+  isVisible BOOLEAN
+);

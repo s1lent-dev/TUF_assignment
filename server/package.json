@@ -1,12 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "dist/server.js",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"npm run start\"",
     "start": "nodemon dist/server.js",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "build": "tsc",
+    "vercel-build": "npm run build"
   },
   "author": "",
   "license": "ISC",

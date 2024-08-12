@@ -1,10 +1,8 @@
-CREATE DATABASE TUF_DB;
-USE TUF_DB;
-
-CREATE TABLE banner (
-  bannerId INT PRIMARY KEY AUTO_INCREMENT,
-  bannerDesc TEXT,
-  timer INT,
-  link VARCHAR(255),
-  isVisible BOOLEAN
+CREATE TABLE IF NOT EXISTS banner (
+    bannerId INT PRIMARY KEY,
+    title VARCHAR(255),
+    description VARCHAR(255),
+    timer INT,
+    link VARCHAR(255),
+    isVisible BOOLEAN
 );

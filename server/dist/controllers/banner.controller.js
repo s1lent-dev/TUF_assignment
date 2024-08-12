@@ -10,7 +10,7 @@ const getBanners = asyncHandler(async (req, res, next) => {
         banner = await redis.get("banners");
     }
     else {
-        const [rows] = await pool.query("SELECT * FROM banner");
+        const [rows] = await pool.query("SELECT * FROM banners");
         banner = rows;
         redis.set("banners", JSON.stringify(banner));
     }
@@ -19,7 +19,7 @@ const getBanners = asyncHandler(async (req, res, next) => {
 // get banner by id
 const getBannerById = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    const [rows] = await pool.query("SELECT * FROM banner WHERE bannerId = ?", [id]);
+    const [rows] = await pool.query("SELECT * FROM banners WHERE bannerId = ?", [id]);
     const banner = rows;
     if (banner.length === 0) {
         throw new ErrorHandler("Banner not found", 404);
@@ -30,20 +30,20 @@ const getBannerById = asyncHandler(async (req, res, next) => {
 //toggle banner status
 const toggleBannerStatus = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    const [rows] = await pool.query("SELECT * FROM banner WHERE bannerId=?", [id]);
+    const [rows] = await pool.query("SELECT * FROM banners WHERE bannerId=?", [id]);
     const response = rows;
     if (response.length === 0) {
         throw new ErrorHandler("Banner not found", 404);
     }
     const status = !response[0].isVisible;
-    await pool.query("UPDATE banner SET isVisible=? WHERE bannerId=?", [status, id]);
+    await pool.query("UPDATE banners SET isVisible=? WHERE bannerId=?", [status, id]);
     redis.del("banners");
     res.json(new responseHandler(200, "Banner status updated successfully", {}));
 });
 // Add banner
 const addBanner = asyncHandler(async (req, res, next) => {
-    const { title, description, link, timer } = req.body;
-    await pool.query("INSERT INTO banner (title, description, link, timer) VALUES (?, ?, ?, ?)", [title, description, link, timer]);
+    const { bannerId, title, description, link, timer, isVisible } = req.body;
+    await pool.query("INSERT INTO banners (bannerId, title, description, link, timer, isVisible) VALUES (?, ?, ?, ?, ?, ?)", [bannerId, title, description, link, timer, isVisible]);
     redis.del("banners");
     res.json(new responseHandler(200, "Banner added successfully", {}));
 });
@@ -51,7 +51,7 @@ const addBanner = asyncHandler(async (req, res, next) => {
 const updateBannerDescription = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { description } = req.body;
-    await pool.query("UPDATE banner SET description=? WHERE bannerId=?", [
+    await pool.query("UPDATE banners SET description=? WHERE bannerId=?", [
         description,
         id,
     ]);
@@ -62,7 +62,7 @@ const updateBannerDescription = asyncHandler(async (req, res, next) => {
 const updateBannerTimer = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { timer } = req.body;
-    await pool.query("UPDATE banner SET timer=? WHERE bannerId=?", [timer, id]);
+    await pool.query("UPDATE banners SET timer=? WHERE bannerId=?", [timer, id]);
     redis.del("banners");
     res.json(new responseHandler(200, "Banner timer updated successfully", {}));
 });
@@ -70,7 +70,7 @@ const updateBannerTimer = asyncHandler(async (req, res, next) => {
 const updateBannerLink = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { link } = req.body;
-    await pool.query("UPDATE banner SET link=? WHERE bannerId=?", [link, id]);
+    await pool.query("UPDATE banners SET link=? WHERE bannerId=?", [link, id]);
     redis.del("banners");
     res.json(new responseHandler(200, "Banner link updated successfully", {}));
 });

@@ -1,2 +1,1 @@
-
-show tables;
+insert into banner (bannerId, title, description, timer, link, isVisible) values (1, 'banner1', 'banner1 description', 10, 'https://www.google.com', true);

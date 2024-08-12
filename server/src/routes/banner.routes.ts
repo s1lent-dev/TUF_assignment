@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { getBanners, toggleBannerStatus, addBanner, updateBannerDescription, updateBannerLink, updateBannerTimer } from "../controllers/banner.controller.js";
+import { getBanners, getBannerById, toggleBannerStatus, addBanner, updateBannerDescription, updateBannerLink, updateBannerTimer } from "../controllers/banner.controller.js";
 
 const bannerRouter = Router();
 
 // Banner routes
-bannerRouter.get("/", getBanners);
+bannerRouter.get("/getAll", getBanners);
+bannerRouter.get("/get/:id", getBannerById);
 bannerRouter.put("/toggle-status/:id", toggleBannerStatus);
 bannerRouter.post("/add", addBanner);
 bannerRouter.put("/update-description/:id", updateBannerDescription);

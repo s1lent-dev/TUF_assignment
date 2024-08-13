@@ -1,0 +1,12 @@
+
+.app {
+  color: $tc-light;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, rgba(255, 0, 0, 0.15), transparent 25%),
+  radial-gradient(circle at bottom right, rgba(255, 0, 0, 0.15), transparent 25%),
+  #0f0f0f; 
+}

@@ -1,0 +1,31 @@
+nav {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  transition: all ease 1s;
+  .navContainer {
+    @include flex(row, center, space-between);
+    width: 100%;
+    background-color: $bg-dark;
+    padding: 1rem 4rem;
+    .navLinks{
+        @include flex(row, center, space-between, 3rem);
+        button {
+            @include btn-primary(0.75rem 1.25rem, $bg-btn-dark, $tc-light, 5px);
+            letter-spacing: 0.05rem;
+            font-weight: $fw-medium;
+        }
+        .profile {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: $bg-light;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+  }
+}

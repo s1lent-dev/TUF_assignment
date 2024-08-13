@@ -1,0 +1,67 @@
+section {
+    width: 100%;
+    .communityContainer {
+        padding-top: 150px;
+        @include flex(column, center, center);
+        .heading {
+            @include flex(column, center, center);
+            h4 {
+                font-size: $fs-xxxxl;
+                color: $tc-light;
+                font-weight: $fw-bold;
+            }
+            p {
+                font-size: $fs-md;
+                color: $tc-light-2;
+                max-width: 700px;
+                text-align: center;
+                margin-top: 1rem;
+            }
+        }
+        .communities {
+            @include flex(row, center, center);
+            padding-top: 50px;
+            .singleCommunity {
+                @include flex(column, center, center);
+                .outerBox {
+                    @include flex(column, center, center);
+                    width: 283px;
+                    height: 266px;
+                    background-color: rgba($bg-card-light, 0.15);
+                    border-radius: 15px;
+                    backdrop-filter: blur(10px);
+                    --webkit-backdrop-filter: blur(10px);
+
+                    .innerBox {
+                        @include flex(column, center, center);
+                        width: 219px;
+                        height: 191px;
+                        background-color: rgba($bg-card-light, 0.45);
+                        border-radius: 15px;
+                        .heading {
+                            @include flex(column, center, center);
+                            h6 {
+                                font-size: $fs-xxxxl;
+                                color: $tc-light;
+                                font-weight: $fw-bold;
+                            }
+                        }
+                        .social {
+                            @include flex(row, center, center, 0.5rem);
+                            span {
+                                font-size: $fs-sm;
+                                color: $tc-light;
+                                margin-right: 0.5rem;
+                            }
+                            svg {
+                                font-size: 20px;
+                                color: $tc-dark;
+                                margin-right: 0.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

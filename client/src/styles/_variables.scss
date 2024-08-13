@@ -1,0 +1,45 @@
+/* Typography settings */
+
+// Font sizes
+$fs-xxs: 6px;
+$fs-xs: 8px;
+$fs-sm: 12px;
+$fs-md: 16px;
+$fs-lg: 20px;
+$fs-xl: 24px;
+$fs-xxl: 32px;
+$fs-xxxl: 36px;
+$fs-xxxxl: 44px;
+
+// Font weights
+$fw-thin: 100;
+$fw-xl: 200; // Extra Light
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+$fw-xbold: 800; // Extra Bold
+$fw-black: 900;
+
+// Font families
+$ff-primary: "DM Sans", sans-serif;
+$ff-secondary: "Amaranth", sans-serif;
+$ff-fallback: sans-serif;
+
+
+
+/* Color settings */
+
+// Text colors
+$tc-light: #f3f3f3;
+$tc-light-2: #7a7a7a;
+$tc-dark: #e11d48;
+
+// Background colors
+$bg-dark: #0f0f0f;
+$bg-light: #eeeeee;
+$bg-card-light: #3d3d3d;
+$bg-card-dark: #191919;
+$bg-card-hover-light: #f5f5f5;
+$bg-card-hover-dark: #061c3d;
+$bg-btn-dark: #e11d48;

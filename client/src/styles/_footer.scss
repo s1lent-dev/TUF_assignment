@@ -1,0 +1,92 @@
+footer {
+  background-color: $bg-dark;
+  color: $tc-light;
+  padding: 1rem 1rem;
+  @include flex(column, center, center);
+  margin-top: 150px;
+  .Footer-Top {
+    @include flex;
+    width: 90%;
+    .Footer-Left {
+        flex: 2;
+        .Brand {
+          font-size: $fs-xxxl;
+          font-family: $ff-secondary;
+          font-weight: bold;
+          color: $tc-dark;
+        }
+    
+        .Description {
+          margin-top: 10px;
+          max-width: 350px;
+          line-height: 1.5;
+          font-size: $fs-sm;
+          color: $tc-light-2;
+        }
+    
+        .SocialIcons {
+          height: 50px;
+          margin-top: 20px;
+          @include flex(flex, start, start);
+          a {
+            @include flex;
+            width: 25px;
+            height: 25px;
+            padding: 5px;
+            color: $tc-light;
+            font-size: $fs-lg;
+            border: 1px solid $tc-light;
+            border-radius: 50%;
+            svg {
+              color: $tc-light;
+              width: 20px;
+            }
+          }
+        }
+      }
+    
+      .Footer-Right {
+        @include flex(row, start, space-between);
+        flex: 4;
+    
+        .Company,
+        .QuickAccess,
+        .DsaSheets,
+        .DsaPlaylist {
+            margin-right: 20px;
+          .Title {
+            font-weight: $fw-bold;
+            margin-bottom: 10px;
+            color: $tc-dark;
+            letter-spacing: 0.1rem;
+          }
+    
+          div {
+            font-weight: 100;
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 25px;
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+              color: $tc-dark;
+              opacity: 1;
+            }
+          }
+        }
+      }
+  }
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: $tc-light;
+    opacity: 0.2;
+    margin: 20px 0;
+  }
+  .Footer-Bottom {
+    @include flex(row, center, center);
+    font-size: $fs-md;
+    opacity: 0.5;
+    padding-bottom: 20px;
+  }
+}

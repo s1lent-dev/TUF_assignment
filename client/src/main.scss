@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+// Import all styles here
+
+@import "styles/variables.scss";
+@import "styles/mixins.scss";
+@import "styles/loader.scss";
+@import "app.scss";
+@import "styles/navbar.scss";
+@import "styles/banner.scss";
+@import "styles/categories.scss";
+@import "styles/community.scss";
+@import "styles/footer.scss";
+@import "styles/dashboard.scss";
+@import "styles/sidebar.scss";
+
+
+
+:root {
+  // Font
+  font-family: "DM sans", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 16px;
+  font-synthesis: none;
+
+  // Others
+  line-height: 1;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  background-color: $bg-dark;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.link, Link {
+  list-style: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: $ff-primary;
+}

@@ -47,6 +47,14 @@ const addBanner = asyncHandler(async (req, res, next) => {
     redis.del("banners");
     res.json(new responseHandler(200, "Banner added successfully", {}));
 });
+// update banner title
+const updateBannerTitle = asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const { title } = req.body;
+    await pool.query("UPDATE banners SET title=? WHERE bannerId=?", [title, id]);
+    redis.del("banners");
+    res.json(new responseHandler(200, "Banner title updated successfully", {}));
+});
 // update banner description
 const updateBannerDescription = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
@@ -74,4 +82,4 @@ const updateBannerLink = asyncHandler(async (req, res, next) => {
     redis.del("banners");
     res.json(new responseHandler(200, "Banner link updated successfully", {}));
 });
-export { getBanners, getBannerById, toggleBannerStatus, addBanner, updateBannerDescription, updateBannerTimer, updateBannerLink };
+export { getBanners, getBannerById, toggleBannerStatus, addBanner, updateBannerTitle, updateBannerDescription, updateBannerTimer, updateBannerLink };

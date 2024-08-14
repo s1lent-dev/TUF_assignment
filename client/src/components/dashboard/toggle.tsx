@@ -1,9 +1,17 @@
 // Imports
 import { useState } from "react";
-
+import { useToggle } from "@/utils/apiFeatures";
+import { useSelector } from "react-redux";
+import { BannerType } from "@/types/types";
+import { RootState } from "@/context/store";
 const Toggle = () => {
-  const [isToggled, setIsToggled] = useState(true);
 
+  const banner = useSelector((state: RootState) => state.banner.bannerData) as BannerType;
+  const { toggleStatus } = useToggle();
+  const handleToggle = async () => {
+    await toggleStatus(`${import.meta.env.VITE_BANNER_API}/toggle-status`, 1);
+  }
+  const [isToggled, setIsToggled] = useState(!banner.isVisible);
   const toggleDarkMode = () => {
     setIsToggled(!isToggled);
   };
@@ -14,7 +22,7 @@ const Toggle = () => {
       <div
         id="toggle"
         className={`changer ${isToggled ? "" : "change"}`}
-        onClick={toggleDarkMode}
+        onClick={()=> {handleToggle(); toggleDarkMode();}}
       >
         <span className={`changer ${isToggled ? "" : "change"}`}>
           <div className={`moonIcon ${isToggled ? "" : "change"}`}>

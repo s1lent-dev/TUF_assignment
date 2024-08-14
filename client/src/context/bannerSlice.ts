@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const bannerSlice = createSlice({
-  name: "sheet",
+  name: "banner",
   initialState: {
-    bannerData: [],
+    bannerData: {},
   },
 
   reducers: {

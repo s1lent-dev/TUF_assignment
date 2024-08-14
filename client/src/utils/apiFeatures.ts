@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { setBannerData } from '../context/bannerSlice';
 
 
-const useGetAllBanners = () => {
+const useGetBannerById = () => {
 
     const dispatch = useDispatch();
     const fetchBanners = async (endpoint: string) => {
         try {
             const res = await axios.get(endpoint);
-            const banners = res.data;
+            const banners = res.data.data.response;
             dispatch(setBannerData(banners));
         } catch (error) {
             console.error(error);
@@ -30,6 +30,18 @@ const useToggle = () => {
     return { toggleStatus };
 }
 
+const useUpdateTitle = () => {
+
+        const updateTitle = async (endpoint: string, bannerId: number, title: string) => {
+            try {
+                await axios.put(`${endpoint}/${bannerId}`, { title });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        return { updateTitle };
+    }
+
 const useUpdateDesc = () => {
 
     const updateDesc = async (endpoint: string, bannerId: number, description: string) => {
@@ -44,7 +56,7 @@ const useUpdateDesc = () => {
 
 const useUpdateTimer = () => {
     
-    const updateTimer = async (endpoint: string, bannerId: number, timer: number) => {
+    const updateTimer = async (endpoint: string, bannerId: number, timer: string) => {
         try {
             await axios.put(`${endpoint}/${bannerId}`, { timer });
         } catch (error) {
@@ -67,4 +79,4 @@ const useUpdateLink = () => {
 }
 
 
-export { useGetAllBanners, useToggle, useUpdateDesc, useUpdateTimer, useUpdateLink };
+export { useGetBannerById, useToggle, useUpdateTitle, useUpdateDesc, useUpdateTimer, useUpdateLink };

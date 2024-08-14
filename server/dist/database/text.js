@@ -5,5 +5,4 @@ const pool = mysql.createPool({
     password: 'Silent@8712',
     database: 'code_zeniths'
 }).promise();
-const [rows] = await pool.query("SELECT * FROM emp where id = ?", [1]);
-console.log(rows, rows[0]);
+const [rows] = await pool.query("SELECT * FROM banners");

@@ -6,21 +6,21 @@ const MainSection = () => {
   const [minutes, setMinutes] = useState("");
   const [seconds, setSeconds] = useState("");
 
-  const handleHoursChange = (e) => {
+  const handleHoursChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === "" || (Number(value) >= 0 && Number(value) <= 24)) {
       setHours(value);
     }
   };
 
-  const handleMinutesChange = (e) => {
+  const handleMinutesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === "" || (Number(value) >= 0 && Number(value) < 60)) {
       setMinutes(value);
     }
   };
 
-  const handleSecondsChange = (e) => {
+  const handleSecondsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === "" || (Number(value) >= 0 && Number(value) < 60)) {
       setSeconds(value);

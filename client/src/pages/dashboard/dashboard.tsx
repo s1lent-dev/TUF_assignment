@@ -1,9 +1,7 @@
-
+import DashboardSection from "@/components/dashboard/dashboard"
 const Dashboard = () => {
   return (
-    <div>
-      Dashboard
-    </div>
+      <DashboardSection />
   )
 }
 

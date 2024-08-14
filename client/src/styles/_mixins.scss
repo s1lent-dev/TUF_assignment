@@ -111,6 +111,12 @@
   }
 }
 
+@mixin pos-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 @mixin btn-primary($p: 0.5rem 1rem, $bg, $color, $br) {
   cursor: pointer;

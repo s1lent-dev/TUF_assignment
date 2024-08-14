@@ -1,0 +1,179 @@
+.dashboard {
+  width: 100%;
+  @include flex(column, center, center, 0);
+  .dashContainer {
+    @include flex(column, start, start, 0);
+    width: 1000px;
+    height: 600px;
+    background-color: rgba($bg-card-light, 0.4);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.7);
+    .dashTop {
+      width: 100%;
+      header {
+        @include flex(row, center, space-between);
+        width: 100%;
+        .headerLeft {
+          @include flex(row, center, start, 0.5rem);
+          .circle {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            opacity: 0.7;
+            &.red {
+              background-color: red;
+            }
+            &.yellow {
+              background-color: yellow;
+            }
+            &.green {
+              background-color: green;
+            }
+          }
+        }
+        .searchbar {
+          @include flex(row, center, center, 0.5rem);
+          position: relative;
+          .searchIcon {
+            position: absolute;
+            left: 10px;
+            svg {
+              font-size: 20px;
+              color: $tc-light-2;
+              opacity: 0.7;
+            }
+          }
+
+          input {
+            padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+            background-color: rgba($bg-dark, 0.7);
+            border: 1px solid rgba($bg-card-light, 0.4);
+            border-radius: 25px;
+            outline: none;
+            color: $tc-light;
+            &:focus {
+              border-color: rgba($bg-card-light, 0.9);
+            }
+          }
+        }
+        .profile {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          background-color: $bg-light;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+    .dashBottom {
+      width: 100%;
+      @include flex(row, start, space-between, 5rem);
+      padding-top: 6rem;
+      aside {
+        @include flex(column, start, start, 2.5rem);
+        padding-left: 15px;
+        svg {
+          font-size: 24px;
+          color: $tc-light-2;
+          cursor: pointer;
+          &.active {
+            color: $tc-dark;
+          }
+        }
+      }
+      section {
+        @include flex(column, start, start, 3rem);
+        height: 350px;
+        background-color: rgba($bg-card-light, 0.2);
+        border: 1px solid rgba($bg-card-light, 0.5);
+        border-radius: 15px;
+        padding: 2rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
+          display: flex;
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba($bg-dark, 1);
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: $tc-dark;
+          border-radius: 10px;
+          border: 3px solid rgba($bg-card-light, 0.2);
+        }
+
+        .toggleBanner {
+          @include flex(row, center, space-between, 1rem);
+          width: 100%;
+          background-color: rgba($bg-card-light, 0.4);
+          border: 1px solid rgba($tc-light, 0.25);
+          border-radius: 12px;
+          padding: 1rem 1rem;
+          h4 {
+            color: $tc-light;
+            opacity: 0.6;
+          }
+        }
+
+        .editTitle,
+        .editDesc,
+        .editTimer,
+        .editLink {
+          @include flex(column, center, start, 1rem);
+          width: 100%;
+          background-color: rgba($bg-card-light, 0.4);
+          border: 1px solid rgba($tc-light, 0.25);
+          border-radius: 12px;
+          padding: 1rem 1rem;
+          h4 {
+            color: $tc-light;
+            opacity: 0.6;
+            align-self: start;
+          }
+          .timeInputs {
+            @include flex(row, center, center, 1rem);
+            input {
+              padding: 1rem;
+              background-color: transparent;
+              border: 1px solid rgba($tc-light, 0.4);
+              outline: none;
+              color: $tc-light;
+              &:focus {
+                border-color: rgba($tc-dark, 0.9);
+              }
+            }
+            span {
+              color: $tc-light;
+              opacity: 0.6;
+            }
+          }
+          input {
+            width: 100%;
+            padding: 1rem;
+            background-color: transparent;
+            border: 1px solid rgba($tc-light, 0.4);
+            outline: none;
+            color: $tc-light;
+            &:focus {
+              border-color: rgba($tc-dark, 0.9);
+            }
+          }
+          button {
+            @include btn-primary(0.75rem 1.25rem, $bg-btn-dark, $tc-light, 5px);
+            letter-spacing: 0.05rem;
+            font-weight: $fw-medium;
+          }
+        }
+      }
+    }
+  }
+}

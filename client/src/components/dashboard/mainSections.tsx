@@ -1,8 +1,16 @@
-import Toggle from "./toggle"
+import Toggle from "./toggle";
 import { useState } from "react";
-import { useUpdateDesc, useUpdateTimer, useUpdateLink, useUpdateTitle, useGetBannerById } from "@/utils/apiFeatures";
-const MainSection = () => {
+import {
+  useUpdateDesc,
+  useUpdateTimer,
+  useUpdateLink,
+  useUpdateTitle,
+  useGetBannerById,
+} from "@/utils/apiFeatures";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const MainSection = () => {
   const { fetchBanners } = useGetBannerById();
   const { updateTitle } = useUpdateTitle();
   const { updateDesc } = useUpdateDesc();
@@ -12,59 +20,108 @@ const MainSection = () => {
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [seconds, setSeconds] = useState("");
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [link, setLink] = useState("");
 
-  const handleHoursChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value === "" || (Number(value) >= 0 && Number(value) <= 24)) {
-      setHours(value);
+  // Handle input changes and validate the value
+  const handleInputChange =
+    (
+      setter: React.Dispatch<React.SetStateAction<string>>,
+      min: number,
+      max: number
+    ) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      const numValue = Number(value);
+      if (value === "" || (numValue >= min && numValue <= max)) {
+        setter(value);
+      }
+    };
+
+  const handleHoursChange = handleInputChange(setHours, 0, 24);
+  const handleMinutesChange = handleInputChange(setMinutes, 0, 59);
+  const handleSecondsChange = handleInputChange(setSeconds, 0, 59);
+
+  // Update handlers
+  const updateTitleHandler = async () => {
+    if (title) {
+      try {
+        await updateTitle(
+          `${import.meta.env.VITE_BANNER_API}/update-title`,
+          1,
+          title
+        );
+        await fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
+        toast.success("Title updated successfully");
+      } catch (error) {
+        console.error("Failed to update title:", error);
+        toast.error("Title updation failed");
+      } finally {
+        setTitle("");
+      }
     }
   };
 
-  const handleMinutesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value === "" || (Number(value) >= 0 && Number(value) < 60)) {
-      setMinutes(value);
+  const updateDescHandler = async () => {
+    if (desc) {
+      try {
+        await updateDesc(
+          `${import.meta.env.VITE_BANNER_API}/update-description`,
+          1,
+          desc
+        );
+        await fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
+        toast.success("Description updated successfully");
+      } catch (error) {
+        console.error("Failed to update description:", error);
+        toast.error("Description updation failed");
+      } finally {
+        setDesc("");
+      }
     }
   };
 
-  const handleSecondsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value === "" || (Number(value) >= 0 && Number(value) < 60)) {
-      setSeconds(value);
-    }
-  };
-
-  const updateTitleHandler = () => {
-    const title = document.querySelector(".editTitle input") as HTMLInputElement;
-    if (title.value) {
-      updateTitle(`${import.meta.env.VITE_BANNER_API}/update-title/`, 1,  title.value);
-      fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
-    }
-  }
-
-  const updateDescHandler = () => {
-    const desc = document.querySelector(".editDesc input") as HTMLInputElement;
-    if (desc.value) {
-      updateDesc(`${import.meta.env.VITE_BANNER_API}/update-description/`, 1, desc.value);
-      fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
-    }
-  }
-
-  const updateTimerHandler = () => {
+  const updateTimerHandler = async () => {
     if (hours && minutes && seconds) {
       const timer = `${hours}:${minutes}:${seconds}`;
-      updateTimer(`${import.meta.env.VITE_BANNER_API}/update-timer/`, 1, timer);
-      fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
+      try {
+        await updateTimer(
+          `${import.meta.env.VITE_BANNER_API}/update-timer`,
+          1,
+          timer
+        );
+        await fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
+        toast.success("Timer updated successfully");
+      } catch (error) {
+        console.error("Failed to update timer:", error);
+        toast.error("Timer updation failed");
+      } finally {
+        setHours("");
+        setMinutes("");
+        setSeconds("");
+      }
     }
-  }
+  };
 
-  const updateLinkHandler = () => {
-    const link = document.querySelector(".editLink input") as HTMLInputElement;
-    if (link.value) {
-      updateLink(`${import.meta.env.VITE_BANNER_API}/update-link/`, 1, link.value);
-      fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
+  const updateLinkHandler = async () => {
+    if (link) {
+      try {
+        await updateLink(
+          `${import.meta.env.VITE_BANNER_API}/update-link`,
+          1,
+          link
+        );
+        await fetchBanners(`${import.meta.env.VITE_BANNER_API}/get/1`);
+        toast.success("Link updated successfully");
+      } catch (error) {
+        console.error("Failed to update link:", error);
+        toast.error("Link updation failed");
+      } finally {
+        setLink("");
+      }
     }
-  }
+  };
 
   return (
     <section>
@@ -74,12 +131,22 @@ const MainSection = () => {
       </div>
       <div className="editTitle">
         <h4>Update Banner Title</h4>
-        <input type="text" placeholder="update the banner title..." />
+        <input
+          type="text"
+          placeholder="Update the banner title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
         <button onClick={updateTitleHandler}>Save</button>
       </div>
       <div className="editDesc">
         <h4>Update Banner Description</h4>
-        <input type="text" placeholder="update the banner description..." />
+        <input
+          type="text"
+          placeholder="Update the banner description..."
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
+        />
         <button onClick={updateDescHandler}>Save</button>
       </div>
       <div className="editTimer">
@@ -110,11 +177,16 @@ const MainSection = () => {
       </div>
       <div className="editLink">
         <h4>Update Banner Link</h4>
-        <input type="text" placeholder="update the banner link..." />
+        <input
+          type="text"
+          placeholder="Update the banner link..."
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
+        />
         <button onClick={updateLinkHandler}>Save</button>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default MainSection
+export default MainSection;

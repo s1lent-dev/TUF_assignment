@@ -34,7 +34,7 @@ const useUpdateTitle = () => {
 
         const updateTitle = async (endpoint: string, bannerId: number, title: string) => {
             try {
-                await axios.put(`${endpoint}/${bannerId}`, { title });
+                await axios.put(`${endpoint}/${bannerId}`, {title: title});
             } catch (error) {
                 console.error(error);
             }
@@ -46,7 +46,7 @@ const useUpdateDesc = () => {
 
     const updateDesc = async (endpoint: string, bannerId: number, description: string) => {
         try {
-            await axios.put(`${endpoint}/${bannerId}`, { description });
+            await axios.put(`${endpoint}/${bannerId}`, {description: description});
         } catch (error) {
             console.error(error);
         }
@@ -58,7 +58,7 @@ const useUpdateTimer = () => {
     
     const updateTimer = async (endpoint: string, bannerId: number, timer: string) => {
         try {
-            await axios.put(`${endpoint}/${bannerId}`, { timer });
+            await axios.put(`${endpoint}/${bannerId}`, {timer: timer});
         } catch (error) {
             console.error(error);
         }
@@ -70,7 +70,7 @@ const useUpdateLink = () => {
         
     const updateLink = async (endpoint: string, bannerId: number, link: string) => {
         try {
-            await axios.put(`${endpoint}/${bannerId}`, { link });
+            await axios.put(`${endpoint}/${bannerId}`, {link: link});
         } catch (error) {
             console.error(error);
         }

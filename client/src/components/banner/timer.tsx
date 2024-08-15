@@ -21,17 +21,9 @@ const Timer = () => {
     seconds: "00",
   });
 
-  const fetchInitialTimer = useCallback(async () => {
-    try {
-      await fetchTimerState(`${import.meta.env.VITE_BANNER_API}/get-timer`);
-    } catch (error) {
-      console.error("Failed to fetch timer state:", error);
-    }
-  }, [fetchTimerState]);
-
   useEffect(() => {
-    fetchInitialTimer();
-  }, [fetchInitialTimer]);
+    fetchTimerState(`${import.meta.env.VITE_BANNER_API}/get-timer`);
+  }, []);
 
   const initializeTimer = useCallback(() => {
     if (timerState) {

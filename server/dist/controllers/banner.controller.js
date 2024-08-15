@@ -3,6 +3,19 @@ import { responseHandler } from "../utils/responseHandler.js";
 import { ErrorHandler } from "../utils/errorHandler.js";
 import { pool } from "../database/database.js";
 import { redis } from "../app.js";
+import { timerState } from "../utils/countDownHandler.js";
+// get Timer 
+const getTimer = asyncHandler(async (req, res, next) => {
+    let newTimerState = {
+        hours: "00",
+        minutes: "00",
+        seconds: "00",
+    };
+    if (timerState.hours !== "00" || timerState.minutes !== "00" || timerState.seconds !== "00") {
+        newTimerState = timerState;
+    }
+    res.json(new responseHandler(200, "Timer fetched successfully", { TimerState: newTimerState }));
+});
 // Get banners
 const getBanners = asyncHandler(async (req, res, next) => {
     let banner;
@@ -82,4 +95,4 @@ const updateBannerLink = asyncHandler(async (req, res, next) => {
     redis.del("banners");
     res.json(new responseHandler(200, "Banner link updated successfully", {}));
 });
-export { getBanners, getBannerById, toggleBannerStatus, addBanner, updateBannerTitle, updateBannerDescription, updateBannerTimer, updateBannerLink };
+export { getTimer, getBanners, getBannerById, toggleBannerStatus, addBanner, updateBannerTitle, updateBannerDescription, updateBannerTimer, updateBannerLink };

@@ -1,8 +1,21 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setBannerData } from '../context/bannerSlice';
+import { setBannerData, setTimerState } from '../context/bannerSlice';
 
-
+const useGetTimerState = () => {
+    const dispatch = useDispatch();
+    const fetchTimerState = async (endpoint: string) => {
+        try {
+            const res = await axios.get(endpoint);
+            const timerState = res.data.data.TimerState;
+            console.log(timerState);
+            dispatch(setTimerState(timerState));
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    return { fetchTimerState };
+}
 const useGetBannerById = () => {
 
     const dispatch = useDispatch();
@@ -79,4 +92,4 @@ const useUpdateLink = () => {
 }
 
 
-export { useGetBannerById, useToggle, useUpdateTitle, useUpdateDesc, useUpdateTimer, useUpdateLink };
+export { useGetTimerState, useGetBannerById, useToggle, useUpdateTitle, useUpdateDesc, useUpdateTimer, useUpdateLink };

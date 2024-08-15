@@ -18,4 +18,18 @@ type ControllerType = (
 ) => Promise<void | Response<any, Record<string, any>>>;
 
 
-export { ControllerType, Banner };
+interface CustomRequest extends Request {
+  timerState?: {
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
+}
+
+interface TimerState {
+  hours: string;
+  minutes: string;
+  seconds: string;
+}
+
+export { ControllerType, Banner, CustomRequest, TimerState };

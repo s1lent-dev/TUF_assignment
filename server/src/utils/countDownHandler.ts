@@ -9,7 +9,6 @@ let timerState: TimerState = {
 const startCountDown = (timer: TimerState) => {
 
   let newTimer: TimerState = timer;
-  
   const countDownHandler = () => {
 
     let { hours, minutes, seconds } = newTimer;

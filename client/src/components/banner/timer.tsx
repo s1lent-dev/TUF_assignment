@@ -23,7 +23,7 @@ const Timer = () => {
 
   const fetchInitialTimer = useCallback(async () => {
     try {
-      await fetchTimerState(`${import.meta.env.VITE_BANNER_API}/banner/get-timer`);
+      await fetchTimerState(`${import.meta.env.VITE_BANNER_API}/get-timer`);
     } catch (error) {
       console.error("Failed to fetch timer state:", error);
     }

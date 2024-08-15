@@ -22,7 +22,7 @@ const Timer = () => {
   });
 
   useEffect(() => {
-    fetchTimerState(`http://localhost:8712/api/v1/banner/get-timer`);
+    fetchTimerState(`${import.meta.env.VITE_BANNER_API}/get-timer`);
   }, []);
 
   const initializeTimer = useCallback(() => {

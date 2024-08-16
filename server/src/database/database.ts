@@ -1,5 +1,5 @@
 import mysql from "mysql2";
-import { HOST, DB_NAME, USER, PASS, PORT  } from "../constants/constants.js";
+import { HOST, DB_NAME, USER, PASS } from "../constants/constants.js";
 import fs from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";

@@ -4,8 +4,9 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run watch\" \"npm run start\"",
-    "start": "nodemon dist/server.js",
+    "dev": "concurrently \"npm run watch\" \"npm run nodemon\"",
+    "start": "node dist/server.js",
+    "nodemon": "nodemon dist/server.js",
     "watch": "tsc -w",
     "build": "tsc"
   },
